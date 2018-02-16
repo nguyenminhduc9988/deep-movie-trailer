@@ -1,0 +1,30 @@
+- Design
+	- Input: LIRIS dataset:
+				- Video
+					- Subsample video: 5 fps --> C3D
+					- Choose mid frame for feature --> Facenet
+				- Audio
+					- Feed to Soundnet
+			** Load model va load parameter cua 3 model trong 1 chuong trinh
+			
+	- Output: Arousal-Valence score
+				- Aurousal (float > 0)
+				- Arousal  (float > 0)
+
+
+- Extract feature C3D
+	- foreach 16 group of image extract feature
+		- number of image/ video not div by 16
+			- take in convolution fashion from start till end
+				- window size 16 conv from 0..n
+			- split video based on folder containing it
+				- split string by "/"
+				- group by containing folder
+				- foreach group 
+					- convolution
+					- output 4D tensor of w x h x 16 x color
+					- add to list of tensors
+					- video label = containing folder (to assign valence x arousal)
+	- aim genrate multiple feature for a clip in liris
+		-  
+	- mark each feature with video name 
